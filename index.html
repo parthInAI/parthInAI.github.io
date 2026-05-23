@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parth Pandya -- AI/ML Engineer and Data Scientist</title>
+<meta name="description" content="Parth Pandya -- AI/ML Engineer, Data Analyst, and Data Scientist based in Dublin, Ireland.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#07080b;--bg2:#0d0f16;--border:#1a1e2e;--border2:#242840;
+  --accent:#4f8cff;--accent2:#7c5cfc;--green:#1fd4a0;--amber:#f59e0b;
+  --text:#eaedf8;--muted:#62688a;--muted2:#8b91b3;
+  --card:#0f1219;--card-h:#141826;
+  --fh:'Syne',sans-serif;--fb:'DM Sans',sans-serif;
+  --r:10px;--rl:18px;--t:0.28s cubic-bezier(0.4,0,0.2,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:15.5px;line-height:1.72;overflow-x:hidden;}
+a{color:inherit;text-decoration:none;}
+ul{list-style:none;}
+
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:0.7;}
+
+.orb{position:fixed;border-radius:50%;filter:blur(130px);pointer-events:none;z-index:0;}
+.o1{width:560px;height:560px;background:var(--accent);top:-180px;left:-120px;opacity:.13;animation:fl 14s ease-in-out infinite;}
+.o2{width:480px;height:480px;background:var(--accent2);bottom:5%;right:-80px;opacity:.11;animation:fl 18s ease-in-out infinite reverse;}
+.o3{width:320px;height:320px;background:var(--green);top:45%;left:38%;opacity:.07;animation:fl 22s ease-in-out infinite;}
+@keyframes fl{0%,100%{transform:translateY(0) scale(1);}50%{transform:translateY(-36px) scale(1.04);}}
+
+.wrap{max-width:1080px;margin:0 auto;padding:0 28px;position:relative;z-index:1;}
+section{padding:96px 0;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:15px 0;backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);background:rgba(7,8,11,0.78);border-bottom:1px solid var(--border);}
+.nav-in{display:flex;align-items:center;justify-content:space-between;max-width:1080px;margin:0 auto;padding:0 28px;}
+.nav-logo{font-family:var(--fh);font-weight:800;font-size:1.15rem;letter-spacing:-0.02em;background:linear-gradient(135deg,var(--accent),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.nav-links{display:flex;gap:32px;}
+.nav-links a{font-size:0.84rem;font-weight:500;color:var(--muted);letter-spacing:0.02em;transition:color var(--t);position:relative;}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--accent);transition:width var(--t);}
+.nav-links a:hover{color:var(--text);}
+.nav-links a:hover::after{width:100%;}
+
+#hero{min-height:100vh;display:flex;align-items:center;padding-top:76px;}
+.hero-wrap{display:grid;grid-template-columns:1fr auto;gap:52px;align-items:center;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--green);background:rgba(31,212,160,0.08);border:1px solid rgba(31,212,160,0.2);border-radius:100px;padding:5px 14px;margin-bottom:24px;}
+.hero-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:blink 2.2s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.3;}}
+.hero-name{font-family:var(--fh);font-size:clamp(2.8rem,5.5vw,5rem);font-weight:800;line-height:1.0;letter-spacing:-0.04em;margin-bottom:12px;}
+.hero-name .grad{background:linear-gradient(135deg,var(--accent) 0%,var(--accent2) 45%,var(--green) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-roles{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px;}
+.role-pill{font-size:0.78rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;padding:4px 12px;border-radius:100px;background:rgba(79,140,255,0.1);border:1px solid rgba(79,140,255,0.2);color:var(--accent);}
+.hero-bio{font-size:0.98rem;color:var(--muted2);max-width:540px;line-height:1.82;margin-bottom:36px;}
+.hero-bio strong{color:var(--text);font-weight:500;}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:52px;}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:11px 26px;border-radius:100px;font-size:0.87rem;font-weight:500;cursor:pointer;transition:var(--t);border:none;letter-spacing:0.01em;font-family:var(--fb);}
+.btn-p{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:0 4px 20px rgba(79,140,255,0.28);}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(79,140,255,0.38);}
+.btn-o{background:transparent;color:var(--muted2);border:1px solid var(--border2);}
+.btn-o:hover{border-color:var(--accent);color:var(--accent);background:rgba(79,140,255,0.06);}
+.hero-stats{display:flex;gap:44px;padding-top:36px;border-top:1px solid var(--border);}
+.stat-n{font-family:var(--fh);font-size:2rem;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.stat-l{font-size:0.76rem;color:var(--muted);letter-spacing:0.05em;margin-top:2px;}
+.avatar-ring{width:210px;height:210px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2),var(--green));padding:3px;animation:spin 9s linear infinite;flex-shrink:0;}
+@keyframes spin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+.avatar-in{width:100%;height:100%;border-radius:50%;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-family:var(--fh);font-size:3.8rem;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;position:relative;}
+.avatar-in::before{content:'';position:absolute;inset:3px;border-radius:50%;background:var(--bg2);z-index:-1;}
+
+.s-label{display:inline-block;font-size:0.72rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;}
+.s-title{font-family:var(--fh);font-size:clamp(1.7rem,3.5vw,2.6rem);font-weight:800;letter-spacing:-0.03em;line-height:1.08;margin-bottom:14px;}
+.s-sub{font-size:0.95rem;color:var(--muted2);max-width:500px;line-height:1.72;}
+
+#about{background:linear-gradient(180deg,transparent,var(--bg2) 25%,var(--bg2) 75%,transparent);}
+.about-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:72px;align-items:start;}
+.about-text p{color:var(--muted2);line-height:1.85;margin-bottom:18px;}
+.about-text p strong{color:var(--text);font-weight:500;}
+.info-stack{display:flex;flex-direction:column;gap:12px;}
+.info-row{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px 20px;display:flex;flex-direction:column;gap:3px;transition:border-color var(--t);}
+.info-row:hover{border-color:var(--border2);}
+.info-l{font-size:0.72rem;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;}
+.info-v{font-size:0.9rem;font-weight:500;color:var(--text);}
+.info-v a{color:var(--accent);}
+.info-v a:hover{text-decoration:underline;}
+
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px;margin-top:48px;}
+.sk-card{background:var(--card);border:1px solid var(--border);border-radius:var(--rl);padding:24px;transition:var(--t);}
+.sk-card:hover{border-color:rgba(79,140,255,0.28);transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,0.3);}
+.sk-head{font-family:var(--fh);font-size:0.78rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--accent);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.sk-ico{width:26px;height:26px;border-radius:7px;background:rgba(79,140,255,0.1);display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:700;color:var(--accent);}
+.tags{display:flex;flex-wrap:wrap;gap:6px;}
+.tag{font-size:0.76rem;padding:4px 10px;border-radius:100px;background:rgba(255,255,255,0.04);border:1px solid var(--border);color:var(--muted2);transition:var(--t);}
+.tag:hover{background:rgba(79,140,255,0.09);border-color:rgba(79,140,255,0.25);color:var(--accent);}
+
+#projects{background:var(--bg2);}
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px;margin-top:48px;}
+.proj-card{background:var(--card);border:1px solid var(--border);border-radius:var(--rl);padding:28px;display:flex;flex-direction:column;gap:14px;transition:var(--t);position:relative;overflow:hidden;}
+.proj-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2),var(--green));transform:scaleX(0);transform-origin:left;transition:transform var(--t);}
+.proj-card:hover::before{transform:scaleX(1);}
+.proj-card:hover{border-color:rgba(79,140,255,0.22);transform:translateY(-5px);box-shadow:0 18px 52px rgba(0,0,0,0.38);background:var(--card-h);}
+.proj-ico{width:44px;height:44px;border-radius:11px;background:rgba(79,140,255,0.1);border:1px solid rgba(79,140,255,0.18);display:flex;align-items:center;justify-content:center;font-family:var(--fh);font-size:0.68rem;font-weight:700;color:var(--accent);}
+.proj-name{font-family:var(--fh);font-size:1rem;font-weight:700;color:var(--text);letter-spacing:-0.01em;line-height:1.3;}
+.proj-desc{font-size:0.84rem;color:var(--muted2);line-height:1.78;flex:1;}
+.proj-tags{display:flex;flex-wrap:wrap;gap:5px;}
+.proj-tag{font-size:0.7rem;padding:3px 9px;border-radius:100px;background:rgba(79,140,255,0.07);border:1px solid rgba(79,140,255,0.14);color:var(--accent);font-weight:500;}
+.proj-link{display:inline-flex;align-items:center;gap:5px;font-size:0.8rem;font-weight:500;color:var(--muted);margin-top:2px;transition:color var(--t);}
+.proj-link:hover{color:var(--accent);}
+.proj-link svg{width:13px;height:13px;transition:transform var(--t);}
+.proj-link:hover svg{transform:translate(2px,-2px);}
+
+.tl{position:relative;margin-top:48px;padding-left:28px;}
+.tl::before{content:'';position:absolute;left:0;top:10px;bottom:10px;width:1px;background:linear-gradient(180deg,var(--accent),rgba(79,140,255,0.1));}
+.tl-item{position:relative;margin-bottom:40px;}
+.tl-item:last-child{margin-bottom:0;}
+.tl-item::before{content:'';position:absolute;left:-34px;top:10px;width:12px;height:12px;border-radius:50%;background:var(--accent);border:2px solid var(--bg);box-shadow:0 0 10px rgba(79,140,255,0.5);}
+.tl-card{background:var(--card);border:1px solid var(--border);border-radius:var(--rl);padding:26px 28px;transition:var(--t);}
+.tl-card:hover{border-color:var(--border2);background:var(--card-h);}
+.tl-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:4px;flex-wrap:wrap;}
+.tl-role{font-family:var(--fh);font-size:1rem;font-weight:700;color:var(--text);letter-spacing:-0.01em;}
+.tl-period{font-size:0.76rem;color:var(--muted);background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:100px;padding:3px 11px;white-space:nowrap;}
+.tl-company{font-size:0.85rem;color:var(--accent);font-weight:500;margin-bottom:16px;}
+.tl-pts{display:flex;flex-direction:column;gap:9px;}
+.tl-pt{font-size:0.85rem;color:var(--muted2);line-height:1.68;padding-left:15px;position:relative;}
+.tl-pt::before{content:'';position:absolute;left:0;top:9px;width:4px;height:4px;border-radius:50%;background:var(--green);}
+
+#education{background:linear-gradient(180deg,transparent,var(--bg2) 25%,var(--bg2) 75%,transparent);}
+.edu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:18px;margin-top:48px;}
+.edu-card{background:var(--card);border:1px solid var(--border);border-radius:var(--rl);padding:28px;transition:var(--t);position:relative;overflow:hidden;}
+.edu-card:hover{border-color:rgba(79,140,255,0.25);transform:translateY(-3px);box-shadow:0 14px 40px rgba(0,0,0,0.28);}
+.edu-period{font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--green);font-weight:600;margin-bottom:10px;}
+.edu-deg{font-family:var(--fh);font-size:0.95rem;font-weight:700;color:var(--text);line-height:1.3;margin-bottom:6px;}
+.edu-school{font-size:0.84rem;color:var(--accent);font-weight:500;margin-bottom:12px;}
+.edu-detail{font-size:0.8rem;color:var(--muted2);line-height:1.7;}
+.edu-mod-label{font-size:0.72rem;color:var(--muted);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:6px;margin-top:12px;}
+.mod-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px;}
+.mod-tag{font-size:0.7rem;padding:2px 8px;border-radius:100px;background:rgba(31,212,160,0.07);border:1px solid rgba(31,212,160,0.15);color:var(--green);}
+
+#certs{background:var(--bg2);}
+.certs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;margin-top:48px;}
+.cert-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px;transition:var(--t);display:flex;gap:14px;align-items:flex-start;}
+.cert-card:hover{border-color:var(--border2);background:var(--card-h);}
+.cert-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:6px;}
+.cert-dot.done{background:var(--green);}
+.cert-dot.prog{background:var(--amber);animation:blink 2s ease-in-out infinite;}
+.cert-name{font-size:0.86rem;font-weight:500;color:var(--text);line-height:1.4;margin-bottom:4px;}
+.cert-issuer{font-size:0.76rem;color:var(--muted);}
+.cert-done{font-size:0.7rem;color:var(--green);font-weight:600;margin-top:4px;}
+.cert-prog{font-size:0.7rem;color:var(--amber);font-weight:600;margin-top:4px;}
+
+#contact{text-align:center;}
+.contact-box{background:var(--card);border:1px solid var(--border);border-radius:var(--rl);padding:60px 44px;max-width:640px;margin:48px auto 0;position:relative;overflow:hidden;}
+.contact-box::before{content:'';position:absolute;top:-1px;left:15%;right:15%;height:2px;background:linear-gradient(90deg,transparent,var(--accent),var(--green),transparent);}
+.contact-email{font-family:var(--fh);font-size:clamp(1.1rem,2.5vw,1.6rem);font-weight:700;color:var(--text);letter-spacing:-0.02em;display:block;margin:18px 0 32px;transition:color var(--t);}
+.contact-email:hover{color:var(--accent);}
+.contact-links{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+.c-link{display:inline-flex;align-items:center;gap:7px;padding:10px 22px;border-radius:100px;border:1px solid var(--border2);font-size:0.84rem;font-weight:500;color:var(--muted2);transition:var(--t);}
+.c-link:hover{border-color:var(--accent);color:var(--accent);background:rgba(79,140,255,0.06);}
+
+footer{border-top:1px solid var(--border);padding:28px 0;text-align:center;font-size:0.8rem;color:var(--muted);position:relative;z-index:1;}
+
+.rv{opacity:0;transform:translateY(26px);transition:opacity 0.65s ease,transform 0.65s ease;}
+.rv.on{opacity:1;transform:translateY(0);}
+
+@media(max-width:780px){
+  .hero-wrap{grid-template-columns:1fr;}
+  .avatar-ring{display:none;}
+  .hero-stats{gap:24px;justify-content:center;}
+  .hero-btns{justify-content:center;}
+  .about-grid{grid-template-columns:1fr;gap:36px;}
+  .nav-links{display:none;}
+  .wrap{padding:0 18px;}
+  section{padding:68px 0;}
+  .contact-box{padding:36px 20px;}
+}
+</style>
+</head>
+<body>
+<div class="orb o1"></div>
+<div class="orb o2"></div>
+<div class="orb o3"></div>
+
+<nav>
+  <div class="nav-in">
+    <div class="nav-logo">Parth Pandya</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#certs">Certifications</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="wrap">
+    <div class="hero-wrap">
+      <div>
+        <div class="hero-badge"><span class="dot"></span>Open to opportunities -- Dublin, Ireland</div>
+        <h1 class="hero-name">Parth<br><span class="grad">Pandya</span></h1>
+        <div class="hero-roles">
+          <span class="role-pill">AI / ML Engineer</span>
+          <span class="role-pill">Data Scientist</span>
+          <span class="role-pill">Data Analyst</span>
+        </div>
+        <p class="hero-bio">MSc Artificial Intelligence graduate from <strong>National College of Ireland, Dublin</strong>. Currently building <strong>production ML pipelines</strong> at RakFort. I engineer systems end to end -- from raw data and model training to deployed APIs serving real users at scale.</p>
+        <div class="hero-btns">
+          <a href="#projects" class="btn btn-p">View Projects</a>
+          <a href="#experience" class="btn btn-o">Experience</a>
+          <a href="https://github.com/parthInAI" target="_blank" class="btn btn-o">GitHub</a>
+        </div>
+        <div class="hero-stats">
+          <div><div class="stat-n">2</div><div class="stat-l">Industry Roles</div></div>
+          <div><div class="stat-n">6+</div><div class="stat-l">AI Projects</div></div>
+          <div><div class="stat-n">500+</div><div class="stat-l">Queries / Day</div></div>
+          <div><div class="stat-n">12</div><div class="stat-l">Production Releases</div></div>
+        </div>
+      </div>
+      <div class="avatar-ring"><div class="avatar-in">PP</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="rv">
+        <span class="s-label">About Me</span>
+        <h2 class="s-title">Engineering AI that ships and scales</h2>
+        <p>I am an <strong>AI/ML Engineer and Data Scientist</strong> based in Dublin, Ireland, with a track record of building and deploying machine learning systems in production environments. My current role at RakFort involves owning end-to-end ML pipeline components that serve hundreds of queries daily across twelve consecutive releases with zero regression incidents.</p>
+        <p>My technical foundation spans the full ML lifecycle -- from data preprocessing, feature engineering, and model training, to vector encoding, retrieval systems, LLM integration, and CI/CD deployment. I care equally about model performance and system reliability, and I treat both as engineering problems rather than research exercises.</p>
+        <p>Outside of industry work, I build AI projects that explore the cutting edge -- agentic RAG systems, multi-agent frameworks, generative models from VAEs to diffusion, and privacy-preserving ML with differential privacy. Everything is documented, version-controlled, and production-appropriate.</p>
+      </div>
+      <div class="info-stack rv">
+        <div class="info-row"><div class="info-l">Location</div><div class="info-v">Dublin, Ireland</div></div>
+        <div class="info-row"><div class="info-l">Email</div><div class="info-v"><a href="mailto:parthpandya474@gmail.com">parthpandya474@gmail.com</a></div></div>
+        <div class="info-row"><div class="info-l">LinkedIn</div><div class="info-v"><a href="https://www.linkedin.com/in/parthpandya-/" target="_blank">linkedin.com/in/parthpandya-</a></div></div>
+        <div class="info-row"><div class="info-l">GitHub</div><div class="info-v"><a href="https://github.com/parthInAI" target="_blank">github.com/parthInAI</a></div></div>
+        <div class="info-row"><div class="info-l">Current Role</div><div class="info-v">AI Engineer Intern -- RakFort, Dublin</div></div>
+        <div class="info-row"><div class="info-l">Education</div><div class="info-v">MSc Artificial Intelligence -- NCI Dublin</div></div>
+        <div class="info-row"><div class="info-l">Status</div><div class="info-v" style="color:var(--green);">Open to full-time AI/ML roles</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="rv">
+      <span class="s-label">Technical Skills</span>
+      <h2 class="s-title">What I work with</h2>
+      <p class="s-sub">Built through production deployments, academic research, and hands-on project work across every major area of modern AI engineering.</p>
+    </div>
+    <div class="skills-grid">
+      <div class="sk-card rv"><div class="sk-head"><div class="sk-ico">AI</div>AI and LLMs</div><div class="tags"><span class="tag">Large Language Models</span><span class="tag">RAG Pipelines</span><span class="tag">Prompt Engineering</span><span class="tag">Vector Databases</span><span class="tag">FAISS</span><span class="tag">ChromaDB</span><span class="tag">Embeddings</span><span class="tag">Transformers</span><span class="tag">Ollama</span></div></div>
+      <div class="sk-card rv"><div class="sk-head"><div class="sk-ico">AG</div>Agentic Systems</div><div class="tags"><span class="tag">LangChain</span><span class="tag">MCP Protocol</span><span class="tag">Google A2A Protocol</span><span class="tag">Multi-Agent Frameworks</span><span class="tag">Tool Use</span><span class="tag">PPO</span><span class="tag">DDPG</span><span class="tag">Reinforcement Learning</span></div></div>
+      <div class="sk-card rv"><div class="sk-head"><div class="sk-ico">ML</div>Machine Learning</div><div class="tags"><span class="tag">scikit-learn</span><span class="tag">TensorFlow</span><span class="tag">PyTorch</span><span class="tag">XGBoost</span><span class="tag">Random Forest</span><span class="tag">Gradient Boosting</span><span class="tag">LSTM</span><span class="tag">ARIMA</span><span class="tag">Differential Privacy</span></div></div>
+      <div class="sk-card rv"><div class="sk-head"><div class="sk-ico">GN</div>Generative AI</div><div class="tags"><span class="tag">Diffusion Models</span><span class="tag">DDPM</span><span class="tag">GANs</span><span class="tag">VAE</span><span class="tag">Stable Diffusion</span><span class="tag">U-Net</span><span class="tag">ControlNet</span><span class="tag">Deepfake Detection</span></div></div>
+      <div class="sk-card rv"><div class="sk-head"><div class="sk-ico">DE</div>Data Engineering</div><div class="tags"><span class="tag">Python</span><span class="tag">SQL</span><span class="tag">pandas</span><span class="tag">NumPy</span><span class="tag">Hadoop</span><span class="tag">Spark</span><span class="tag">Power BI</span><span class="tag">Excel</span><span class="tag">EDA</span></div></div>
+      <div class="sk-card rv"><div class="sk-head"><div class="sk-ico">BE</div>Backend and DevOps</div><div class="tags"><span class="tag">FastAPI</span><span class="tag">Docker</span><span class="tag">CI/CD</span><span class="tag">Git</span><span class="tag">GitHub Copilot</span><span class="tag">Streamlit</span><span class="tag">REST APIs</span><span class="tag">Linux</span><span class="tag">RPA</span></div></div>
+      <div class="sk-card rv"><div class="sk-head"><div class="sk-ico">NL</div>NLP and Analytics</div><div class="tags"><span class="tag">NLTK</span><span class="tag">spaCy</span><span class="tag">TextBlob</span><span class="tag">VADER</span><span class="tag">TF-IDF</span><span class="tag">Sentiment Analysis</span><span class="tag">NER</span><span class="tag">Matplotlib</span></div></div>
+      <div class="sk-card rv"><div class="sk-head"><div class="sk-ico">ET</div>AI Ethics and Privacy</div><div class="tags"><span class="tag">Differential Privacy</span><span class="tag">DP-SGD</span><span class="tag">ML Ethics</span><span class="tag">Data Governance</span><span class="tag">Responsible AI</span><span class="tag">GDPR Awareness</span><span class="tag">Federated Learning</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="rv">
+      <span class="s-label">Portfolio</span>
+      <h2 class="s-title">Projects I have built</h2>
+      <p class="s-sub">Complete, working systems built with production-appropriate methods. No tutorial reproductions.</p>
+    </div>
+    <div class="proj-grid">
+
+      <div class="proj-card rv">
+        <div class="proj-ico">RAG</div>
+        <div class="proj-name">Agentic RAG System with Model Context Protocol</div>
+        <p class="proj-desc">Fully local retrieval-augmented generation pipeline where an AI agent decides when to retrieve from ChromaDB, when to fall back to web search, and remembers conversations across sessions. FastAPI MCP server, Streamlit UI, persistent JSON memory. No cloud APIs required.</p>
+        <div class="proj-tags"><span class="proj-tag">FastAPI</span><span class="proj-tag">ChromaDB</span><span class="proj-tag">Ollama</span><span class="proj-tag">LangChain</span><span class="proj-tag">Streamlit</span><span class="proj-tag">MCP</span></div>
+        <a href="https://github.com/parthInAI/agentic-rag-mcp" target="_blank" class="proj-link">View on GitHub <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
+      </div>
+
+      <div class="proj-card rv">
+        <div class="proj-ico">A2A</div>
+        <div class="proj-name">Agent2Agent Multi-Agent System</div>
+        <p class="proj-desc">Three specialized AI agents that discover each other at runtime through a capability registry and delegate tasks with no central coordinator. Built following Google A2A protocol patterns. Fully modular -- adding a new agent requires zero changes to existing ones.</p>
+        <div class="proj-tags"><span class="proj-tag">FastAPI</span><span class="proj-tag">A2A Protocol</span><span class="proj-tag">Multi-Agent</span><span class="proj-tag">TextBlob</span><span class="proj-tag">Pydantic</span></div>
+        <a href="https://github.com/parthInAI/agent2agent" target="_blank" class="proj-link">View on GitHub <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
+      </div>
+
+      <div class="proj-card rv">
+        <div class="proj-ico">GEN</div>
+        <div class="proj-name">Generative AI -- VAE, GAN, Diffusion Models, Deepfake Detection</div>
+        <p class="proj-desc">Four projects from scratch: VAE with 2D latent space visualisation, DCGAN with adversarial training dynamics, Diffusion Models with DDPM sampling (the mechanism inside Stable Diffusion), and Deepfake Detection using DCT frequency domain and FFT spectrum analysis.</p>
+        <div class="proj-tags"><span class="proj-tag">TensorFlow</span><span class="proj-tag">DDPM</span><span class="proj-tag">GANs</span><span class="proj-tag">VAE</span><span class="proj-tag">scikit-learn</span></div>
+        <a href="https://github.com/parthInAI/generative-ai-projects" target="_blank" class="proj-link">View on GitHub <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
+      </div>
+
+      <div class="proj-card rv">
+        <div class="proj-ico">FIN</div>
+        <div class="proj-name">Finance and Economics AI -- 5 Projects</div>
+        <p class="proj-desc">Fraud detection on imbalanced data, customer churn with automated retention engine, algorithmic trading with MACD and RSI backtesting on real stock data, financial news sentiment analysis across five tickers, and corporate bankruptcy prediction combining Altman Z-Score with gradient boosting.</p>
+        <div class="proj-tags"><span class="proj-tag">scikit-learn</span><span class="proj-tag">yfinance</span><span class="proj-tag">NLTK</span><span class="proj-tag">VADER</span><span class="proj-tag">Altman Z-Score</span></div>
+        <a href="https://github.com/parthInAI/finance-economics" target="_blank" class="proj-link">View on GitHub <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
+      </div>
+
+      <div class="proj-card rv">
+        <div class="proj-ico">SEC</div>
+        <div class="proj-name">Security and Privacy AI</div>
+        <p class="proj-desc">Network Intrusion Detection System classifying four attack types using NSL-KDD-mirrored flow features. Differential Privacy implemented from scratch -- Laplace mechanism, DP-SGD with per-sample gradient clipping, and epsilon budget tracking across training epochs.</p>
+        <div class="proj-tags"><span class="proj-tag">Differential Privacy</span><span class="proj-tag">DP-SGD</span><span class="proj-tag">NIDS</span><span class="proj-tag">NumPy</span><span class="proj-tag">Random Forest</span></div>
+        <a href="https://github.com/parthInAI/security-privacy-ai" target="_blank" class="proj-link">View on GitHub <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
+      </div>
+
+      <div class="proj-card rv">
+        <div class="proj-ico">ANA</div>
+        <div class="proj-name">Term Deposit Prediction -- Data Analytics</div>
+        <p class="proj-desc">End-to-end data analytics project on historical banking data predicting whether a client subscribes to a term deposit. Full EDA, preprocessing pipeline, feature selection, classification model building, and business-level interpretation of results.</p>
+        <div class="proj-tags"><span class="proj-tag">pandas</span><span class="proj-tag">scikit-learn</span><span class="proj-tag">EDA</span><span class="proj-tag">Feature Engineering</span><span class="proj-tag">SQL</span></div>
+        <a href="https://github.com/parthInAI/Data-Analytics-term-deposit-prediction" target="_blank" class="proj-link">View on GitHub <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="rv">
+      <span class="s-label">Experience</span>
+      <h2 class="s-title">Where I have worked</h2>
+      <p class="s-sub">Two roles spanning AI engineering in a live production environment and data analytics with measurable business outcomes.</p>
+    </div>
+    <div class="tl">
+
+      <div class="tl-item rv">
+        <div class="tl-card">
+          <div class="tl-top">
+            <div class="tl-role">AI Engineer Intern</div>
+            <div class="tl-period">Dec 2024 -- Present</div>
+          </div>
+          <div class="tl-company">RakFort -- Dublin, Ireland</div>
+          <div class="tl-pts">
+            <div class="tl-pt">Owned four production ML pipeline components across the full lifecycle -- data preprocessing, vector encoding, context injection, and retrieval -- deployed via CI/CD serving 500-plus queries per day with zero regression incidents across 12 consecutive releases.</div>
+            <div class="tl-pt">Diagnosed and resolved a 12% accuracy fault in a live LLM retrieval system by isolating the failure to encoding configuration, iterating on prompt structure, and validating the fix against benchmarks. Query latency fell 18%.</div>
+            <div class="tl-pt">Cut evaluation cycle time by 22% by scripting reusable testing and scoring pipelines, replacing manual assessment and applying GitHub Copilot to accelerate development and documentation.</div>
+            <div class="tl-pt">Maintained 25 active ML jobs per week across dev, test, and production using Docker, Git, and CI/CD -- monitoring pipeline behaviour, surfacing anomalies before they reached downstream consumers, and reporting through structured sprint reviews.</div>
+            <div class="tl-pt">Collaborated with data scientists and engineers to translate business requirements into testable ML outputs, validating model behaviour against operational benchmarks across 12 production releases.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item rv">
+        <div class="tl-card">
+          <div class="tl-top">
+            <div class="tl-role">Data Analyst Intern</div>
+            <div class="tl-period">Apr 2022 -- Sep 2022</div>
+          </div>
+          <div class="tl-company">Sharma Hyundai -- Ahmedabad, India</div>
+          <div class="tl-pts">
+            <div class="tl-pt">Built a time series forecasting model from historical transaction data, raising stock allocation accuracy by 15% and cutting forecasting errors by 12% -- presenting methodology and validation evidence to the operations management team.</div>
+            <div class="tl-pt">Queried, cleaned, and validated 40,000-plus rows of operational data in Python and SQL, raising reporting accuracy by 28% by tracing data failures to their upstream source and fixing them there.</div>
+            <div class="tl-pt">Shipped 3 data reporting pipelines with scheduled outputs, reducing management reporting time by 30% and removing manual data preparation for two business teams.</div>
+            <div class="tl-pt">Introduced scripted weekly data quality checks that eliminated 22% of data inconsistencies, creating a validated data layer underpinning all subsequent model inputs and reporting.</div>
+            <div class="tl-pt">Presented customer segmentation analysis to management, linking statistical findings to business outcomes and informing a revised strategy that grew campaign effectiveness by 12%.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <div class="rv">
+      <span class="s-label">Education</span>
+      <h2 class="s-title">Academic background</h2>
+    </div>
+    <div class="edu-grid">
+
+      <div class="edu-card rv">
+        <div class="edu-period">Jan 2025 -- Jan 2026</div>
+        <div class="edu-deg">MSc Artificial Intelligence -- 2:1</div>
+        <div class="edu-school">National College of Ireland, Dublin</div>
+        <div class="edu-mod-label">Modules</div>
+        <div class="mod-tags">
+          <span class="mod-tag">Engineering and Evaluating AI Systems</span>
+          <span class="mod-tag">Intelligent Agents and Process Automation</span>
+          <span class="mod-tag">ML Ethics and Data Governance</span>
+          <span class="mod-tag">Responsible AI</span>
+          <span class="mod-tag">Cloud-based AI Tools</span>
+        </div>
+        <div class="edu-detail" style="margin-top:14px;">Academic projects include a production-grade RAG pipeline with FAISS vector indexing (lifted retrieval precision 12%, cut latency 18%), a multi-agent RL system using PPO and DDPG (15% improvement in policy stability), and benchmarking of four NLP classifiers on a 44,000-record dataset with 10-14% F1 and AUC improvement.</div>
+      </div>
+
+      <div class="edu-card rv">
+        <div class="edu-period">Mar 2021 -- Aug 2024</div>
+        <div class="edu-deg">BSc Data Science -- 2:1</div>
+        <div class="edu-school">University of Mumbai, Mumbai</div>
+        <div class="edu-mod-label">Modules</div>
+        <div class="mod-tags">
+          <span class="mod-tag">Machine Learning</span>
+          <span class="mod-tag">Deep Learning</span>
+          <span class="mod-tag">NLP</span>
+          <span class="mod-tag">Predictive Analytics</span>
+          <span class="mod-tag">Algorithms and Data Structures</span>
+          <span class="mod-tag">Statistics</span>
+          <span class="mod-tag">Big Data -- Hadoop and Spark</span>
+          <span class="mod-tag">SQL</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="certs">
+  <div class="wrap">
+    <div class="rv">
+      <span class="s-label">Certifications</span>
+      <h2 class="s-title">Continuous learning</h2>
+    </div>
+    <div class="certs-grid">
+      <div class="cert-card rv"><div class="cert-dot done"></div><div><div class="cert-name">Google Data Analytics Professional Certificate</div><div class="cert-issuer">Google</div><div class="cert-done">Completed</div></div></div>
+      <div class="cert-card rv"><div class="cert-dot done"></div><div><div class="cert-name">AI Foundations and ML Specialization</div><div class="cert-issuer">Coursera / IBM</div><div class="cert-done">Completed</div></div></div>
+      <div class="cert-card rv"><div class="cert-dot done"></div><div><div class="cert-name">Git and GitHub Version Control</div><div class="cert-issuer">Coursera</div><div class="cert-done">Completed</div></div></div>
+      <div class="cert-card rv"><div class="cert-dot done"></div><div><div class="cert-name">Advanced Excel and Power BI</div><div class="cert-issuer">Udemy</div><div class="cert-done">Completed</div></div></div>
+      <div class="cert-card rv"><div class="cert-dot done"></div><div><div class="cert-name">Robotic Process Automation</div><div class="cert-issuer">Professional Certification</div><div class="cert-done">Completed</div></div></div>
+      <div class="cert-card rv"><div class="cert-dot prog"></div><div><div class="cert-name">Generative AI and Prompt Engineering</div><div class="cert-issuer">Google / DeepLearning.AI</div><div class="cert-prog">In Progress</div></div></div>
+      <div class="cert-card rv"><div class="cert-dot prog"></div><div><div class="cert-name">Linux Essentials</div><div class="cert-issuer">Linux Foundation</div><div class="cert-prog">In Progress</div></div></div>
+      <div class="cert-card rv"><div class="cert-dot prog"></div><div><div class="cert-name">AI Mastery Bootcamp 2026 -- 1000 Projects</div><div class="cert-issuer">Udemy / School of AI</div><div class="cert-prog">In Progress</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="rv">
+      <span class="s-label">Contact</span>
+      <h2 class="s-title">Let us build something together</h2>
+      <p class="s-sub" style="margin:0 auto;">Open to full-time AI/ML engineering roles, data science positions, and research collaborations. Based in Dublin and open to remote.</p>
+    </div>
+    <div class="contact-box rv">
+      <p style="color:var(--muted);font-size:0.88rem;">Send me a message at</p>
+      <a href="mailto:parthpandya474@gmail.com" class="contact-email">parthpandya474@gmail.com</a>
+      <div class="contact-links">
+        <a href="https://www.linkedin.com/in/parthpandya-/" target="_blank" class="c-link">LinkedIn -- Parth Pandya</a>
+        <a href="https://github.com/parthInAI" target="_blank" class="c-link">GitHub -- parthInAI</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap"><p>Parth Pandya -- AI/ML Engineer and Data Scientist -- Dublin, Ireland -- 2025</p></div>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(es => {
+    es.forEach(e => { if(e.isIntersecting) e.target.classList.add('on'); });
+  }, {threshold:0.1});
+  document.querySelectorAll('.rv').forEach((el,i) => {
+    el.style.transitionDelay = (i%6)*0.07+'s';
+    obs.observe(el);
+  });
+  const secs = document.querySelectorAll('section[id]');
+  const lnks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let cur='';
+    secs.forEach(s => { if(window.scrollY>=s.offsetTop-110) cur=s.id; });
+    lnks.forEach(l => { l.style.color = l.getAttribute('href')==='#'+cur?'var(--text)':''; });
+  });
+</script>
+</body>
+</html>
