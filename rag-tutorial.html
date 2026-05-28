@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>RAG Pipeline Simulator -- Parth Pandya</title>
+<meta name="description" content="Interactive Retrieval-Augmented Generation pipeline simulator by Parth Pandya, AI/ML Engineer.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#060c1a;--bg2:#0a1220;--border:#1a1e2e;--border2:#242840;
+  --accent:#4f8cff;--accent2:#7c5cfc;--green:#1fd4a0;--amber:#f59e0b;
+  --text:#eaedf8;--muted:#62688a;--muted2:#8b91b3;
+  --card:#0f1219;--card-h:#141826;
+  --fh:'Syne',sans-serif;--fb:'DM Sans',sans-serif;
+  --r:10px;--rl:14px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:15px;line-height:1.7;overflow-x:hidden;min-height:100vh;}
+a{color:inherit;text-decoration:none;}
+button{font-family:var(--fb);cursor:pointer;}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(6,12,26,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:14px 0;}
+.nav-in{max-width:520px;margin:0 auto;padding:0 16px;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{font-family:var(--fh);font-weight:800;font-size:1rem;background:linear-gradient(135deg,var(--accent),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.nav-back{font-size:0.8rem;color:var(--muted);border:1px solid var(--border2);border-radius:100px;padding:5px 14px;transition:all 0.2s;}
+.nav-back:hover{color:var(--accent);border-color:var(--accent);}
+
+/* LAYOUT */
+.app{max-width:520px;margin:0 auto;padding:16px 16px 40px;}
+
+/* HEADER */
+.hdr{text-align:center;padding:24px 0 20px;border-bottom:1px solid var(--border);margin-bottom:20px;}
+.hdr-label{font-size:9px;letter-spacing:5px;color:var(--accent);text-transform:uppercase;margin-bottom:8px;}
+.hdr-title{font-family:var(--fh);font-size:clamp(1.5rem,6vw,2rem);font-weight:800;letter-spacing:-0.03em;color:#fff;line-height:1.1;margin-bottom:8px;}
+.hdr-title span{color:var(--accent);}
+.hdr-sub{font-size:0.82rem;color:var(--muted2);}
+
+/* STATS BAR */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:20px;}
+.stat{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:10px 6px;text-align:center;}
+.stat-n{font-family:var(--fh);font-size:1.4rem;font-weight:900;color:var(--accent);}
+.stat-n.green{color:var(--green);}
+.stat-n.purple{color:#a78bfa;}
+.stat-n.amber{color:var(--amber);}
+.stat-l{font-size:8px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-top:2px;}
+
+/* TABS */
+.tabs{display:flex;border-bottom:1px solid var(--border);margin-bottom:18px;}
+.tab{flex:1;padding:10px 0;background:none;border:none;border-bottom:2px solid transparent;color:var(--muted);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;transition:all 0.2s;position:relative;}
+.tab.active{border-bottom-color:var(--accent);color:var(--accent);}
+.tab-badge{background:var(--accent);color:#0a0f1e;border-radius:99px;font-size:8px;padding:1px 5px;margin-left:4px;font-weight:900;}
+
+/* DOCS */
+.section-label{font-size:9px;color:var(--accent);letter-spacing:3px;text-transform:uppercase;margin-bottom:10px;}
+.doc-card{background:var(--card);border-radius:var(--r);padding:12px;margin-bottom:8px;border-left:3px solid var(--accent);}
+.doc-card:nth-child(2){border-left-color:#a78bfa;}
+.doc-card:nth-child(3){border-left-color:var(--green);}
+.doc-title{font-size:12px;font-weight:700;color:#fff;margin-bottom:4px;}
+.doc-text{font-size:10px;color:var(--muted);line-height:1.5;}
+
+/* STEPS */
+.steps-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:18px;}
+.step-btn{background:var(--card);border:1px solid var(--border);border-radius:var(--rl);padding:14px 10px;text-align:left;display:flex;align-items:center;gap:10px;transition:all 0.2s;color:var(--text);}
+.step-btn:disabled{opacity:0.4;cursor:not-allowed;}
+.step-btn.active{background:rgba(79,140,255,0.1);border-color:var(--accent);}
+.step-btn.done{background:#0f2a1a;border-color:var(--green);}
+.step-btn:not(:disabled):not(.active):hover{border-color:var(--border2);background:var(--card-h);}
+.step-btn.full{grid-column:1/-1;}
+.step-ico{width:36px;height:36px;border-radius:50%;background:var(--bg2);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+.step-btn.active .step-ico{background:rgba(79,140,255,0.15);border-color:var(--accent);}
+.step-btn.done .step-ico{background:rgba(31,212,160,0.1);border-color:var(--green);}
+.step-num{font-size:8px;color:var(--accent);letter-spacing:2px;margin-bottom:2px;}
+.step-btn.done .step-num{color:var(--green);}
+.step-name{font-size:13px;font-weight:700;color:var(--muted2);}
+.step-btn.active .step-name{color:var(--accent);}
+.step-btn.done .step-name{color:var(--green);}
+
+/* QUERY */
+.query-box{background:var(--card);border:1px solid var(--border);border-radius:var(--rl);padding:14px;margin-bottom:16px;}
+.query-input{width:100%;background:#1e293b;border:1px solid #334155;border-radius:8px;padding:10px 12px;color:#fff;font-size:13px;outline:none;font-family:var(--fb);margin-bottom:10px;-webkit-appearance:none;}
+.query-input::placeholder{color:var(--muted);}
+.query-btns{display:flex;gap:8px;}
+.btn-search{flex:1;background:var(--accent);color:#0a0f1e;border:none;border-radius:8px;padding:10px;font-weight:900;font-size:11px;letter-spacing:2px;transition:opacity 0.2s;}
+.btn-generate{flex:1;background:#a78bfa;color:#0a0f1e;border:none;border-radius:8px;padding:10px;font-weight:900;font-size:11px;letter-spacing:2px;transition:opacity 0.2s;}
+.btn-search:disabled,.btn-generate:disabled{opacity:0.4;cursor:not-allowed;}
+.query-hint{font-size:10px;color:#334155;margin-top:8px;line-height:1.6;}
+
+/* RESET */
+.btn-reset{width:100%;background:none;border:1px solid var(--border);border-radius:var(--r);color:var(--muted);padding:12px;font-size:11px;letter-spacing:3px;text-transform:uppercase;transition:all 0.2s;}
+.btn-reset:hover{border-color:var(--border2);color:var(--muted2);}
+
+/* LOGS */
+.log-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
+.btn-clear{background:none;border:none;color:var(--muted);font-size:10px;font-family:var(--fb);letter-spacing:1px;}
+.log-console{background:#050a14;border:1px solid var(--border);border-radius:var(--rl);padding:14px;min-height:300px;font-size:11px;line-height:2;max-height:60vh;overflow-y:auto;}
+.log-empty{color:#334155;}
+.log-line{padding-left:8px;margin-bottom:4px;word-break:break-word;border-left:2px solid;}
+.log-cursor{color:var(--accent);}
+
+/* RESULTS */
+.chunk-card{background:var(--card);border-radius:var(--r);padding:14px;margin-bottom:10px;}
+.chunk-card:nth-child(1){border-left:3px solid var(--accent);}
+.chunk-card:nth-child(2){border-left:3px solid #a78bfa;}
+.chunk-card:nth-child(3){border-left:3px solid var(--green);}
+.chunk-meta{display:flex;justify-content:space-between;margin-bottom:8px;}
+.chunk-src{font-size:10px;color:var(--muted);}
+.chunk-score{font-size:10px;color:var(--amber);font-weight:700;background:rgba(245,158,11,0.1);padding:2px 8px;border-radius:99px;}
+.chunk-text{font-size:12px;color:var(--muted2);line-height:1.7;}
+.answer-box{background:#0a1628;border:1px solid rgba(167,139,250,0.3);border-radius:var(--rl);padding:16px;margin-top:20px;}
+.answer-label{font-size:9px;color:#a78bfa;letter-spacing:3px;text-transform:uppercase;margin-bottom:10px;}
+.answer-text{font-size:14px;color:var(--text);line-height:1.8;}
+.answer-footer{margin-top:10px;font-size:10px;color:var(--muted);}
+.results-empty{background:var(--card);border:1px solid var(--border);border-radius:var(--rl);padding:30px;text-align:center;color:#334155;font-size:11px;}
+
+/* CURSOR BLINK */
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
+.cursor{animation:blink 1s infinite;color:#a78bfa;}
+
+/* ORB */
+body::after{content:'';position:fixed;width:400px;height:400px;border-radius:50%;background:var(--accent);top:-150px;right:-100px;opacity:0.06;filter:blur(100px);pointer-events:none;z-index:0;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <div class="nav-logo">Parth Pandya</div>
+    <a href="https://parthInAI.github.io" class="nav-back">← Portfolio</a>
+  </div>
+</nav>
+
+<div class="app" id="app">
+
+  <div class="hdr">
+    <div class="hdr-label">Live Framework Tutorial</div>
+    <h1 class="hdr-title">RAG Pipeline <span>Simulator</span></h1>
+    <p class="hdr-sub">Tap each step to run it. Watch the logs. Ask a question. See real RAG in action.</p>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="stat-n" id="stat-docs">3</div><div class="stat-l">Docs</div></div>
+    <div class="stat"><div class="stat-n green" id="stat-chunks">0</div><div class="stat-l">Chunks</div></div>
+    <div class="stat"><div class="stat-n purple" id="stat-vectors">0</div><div class="stat-l">Vectors</div></div>
+    <div class="stat"><div class="stat-n amber" id="stat-steps">0/7</div><div class="stat-l">Steps</div></div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" data-tab="pipeline" onclick="switchTab('pipeline')">Pipeline</button>
+    <button class="tab" data-tab="logs" onclick="switchTab('logs')">Logs <span class="tab-badge" id="log-badge" style="display:none">0</span></button>
+    <button class="tab" data-tab="results" onclick="switchTab('results')">Results</button>
+  </div>
+
+  <!-- PIPELINE TAB -->
+  <div id="tab-pipeline">
+    <div class="section-label">Knowledge Base — 3 Documents</div>
+    <div class="doc-card"><div class="doc-title">Product Manual</div><div class="doc-text">The XR-5000 device can be reset by holding the reset button for 7 seconds. Supports WiFi 6 and Bluetooth 5.2. Battery life approximately 12 hours on a full charge...</div></div>
+    <div class="doc-card"><div class="doc-title">FAQ Document</div><div class="doc-text">Q: Warranty period? A: 2-year warranty. Q: Contact support? A: Email support@company.com. Q: Returns? A: Yes, within 30 days with original packaging...</div></div>
+    <div class="doc-card" style="margin-bottom:18px;"><div class="doc-title">Tech Specs</div><div class="doc-text">Processor: Octa-core 3.2GHz. RAM: 8GB LPDDR5. Storage: 256GB NVMe SSD. Display: 6.7 inch OLED 120Hz. Camera: 108MP. OS: Android 14...</div></div>
+
+    <div class="section-label">Pipeline Steps — Tap in Order</div>
+    <div class="steps-grid" id="steps-grid">
+      <button class="step-btn" data-step="ingest" onclick="runStep('ingest')"><div class="step-ico" id="ico-ingest">📄</div><div><div class="step-num">STEP 01</div><div class="step-name">Ingest</div></div></button>
+      <button class="step-btn" data-step="chunk" onclick="runStep('chunk')"><div class="step-ico" id="ico-chunk">✂️</div><div><div class="step-num">STEP 02</div><div class="step-name">Chunk</div></div></button>
+      <button class="step-btn" data-step="embed" onclick="runStep('embed')"><div class="step-ico" id="ico-embed">🔢</div><div><div class="step-num">STEP 03</div><div class="step-name">Embed</div></div></button>
+      <button class="step-btn" data-step="store" onclick="runStep('store')"><div class="step-ico" id="ico-store">🗄️</div><div><div class="step-num">STEP 04</div><div class="step-name">Store</div></div></button>
+      <button class="step-btn" data-step="query" onclick="runStep('query')"><div class="step-ico" id="ico-query">🔍</div><div><div class="step-num">STEP 05</div><div class="step-name">Query</div></div></button>
+      <button class="step-btn" data-step="retrieve" onclick="runStep('retrieve')"><div class="step-ico" id="ico-retrieve">📥</div><div><div class="step-num">STEP 06</div><div class="step-name">Retrieve</div></div></button>
+      <button class="step-btn full" data-step="generate" onclick="runStep('generate')"><div class="step-ico" id="ico-generate">🤖</div><div><div class="step-num">STEP 07</div><div class="step-name">Generate — AI Answer</div></div></button>
+    </div>
+
+    <div class="query-box">
+      <div class="section-label">Your Question</div>
+      <input class="query-input" id="query-input" type="text" placeholder='e.g. "How do I reset the device?"' onkeydown="if(event.key==='Enter')runStep('query')">
+      <div class="query-btns">
+        <button class="btn-search" onclick="runStep('query')">SEARCH</button>
+        <button class="btn-generate" onclick="runStep('generate')">GENERATE</button>
+      </div>
+      <div class="query-hint">Try: "How do I reset the device?" or "What is the warranty?"</div>
+    </div>
+
+    <button class="btn-reset" onclick="resetAll()">Reset Pipeline</button>
+  </div>
+
+  <!-- LOGS TAB -->
+  <div id="tab-logs" style="display:none">
+    <div class="log-header">
+      <div class="section-label" style="margin:0">Pipeline Logs</div>
+      <button class="btn-clear" onclick="clearLogs()">CLEAR</button>
+    </div>
+    <div class="log-console" id="log-console">
+      <div class="log-empty">// Tap a pipeline step to start...</div>
+    </div>
+  </div>
+
+  <!-- RESULTS TAB -->
+  <div id="tab-results" style="display:none">
+    <div class="section-label">Retrieved Chunks</div>
+    <div id="chunks-container">
+      <div class="results-empty">Run the Query step to see retrieved chunks...</div>
+    </div>
+    <div id="answer-container"></div>
+  </div>
+
+</div>
+
+<script>
+const DOCS = [
+  {id:1,title:"Product Manual",content:"The XR-5000 device can be reset by holding the reset button on the back panel for 7 seconds until the LED turns red. The device supports WiFi 6 and Bluetooth 5.2. Battery life is approximately 12 hours on a full charge. To charge, use the included USB-C cable."},
+  {id:2,title:"FAQ Document",content:"Q: What is the warranty period? A: All products come with a 2-year warranty. Q: How do I contact support? A: Email support@company.com or call 1-800-SUPPORT. Q: Can I return the product? A: Yes, within 30 days of purchase with original packaging."},
+  {id:3,title:"Tech Specs",content:"Processor: Octa-core 3.2GHz. RAM: 8GB LPDDR5. Storage: 256GB NVMe SSD. Display: 6.7 inch OLED, 120Hz. Camera: 108MP main, 12MP ultra-wide. OS: Android 14. Weight: 185 grams."}
+];
+
+const LOG_COLORS={info:"#94a3b8",success:"#4ade80",warn:"#fb923c",system:"#38bdf8",embed:"#a78bfa",chunk:"#f472b6",retrieve:"#fbbf24",store:"#34d399"};
+
+let state={loading:false,completed:new Set(),chunks:[],vectorDB:[],retrieved:[],answer:"",streaming:false,activeStep:null};
+
+function sleep(ms){return new Promise(r=>setTimeout(r,ms));}
+
+function chunkText(text,size=20){
+  const words=text.split(" ");const chunks=[];
+  for(let i=0;i<words.length;i+=size)chunks.push(words.slice(i,i+size).join(" "));
+  return chunks;
+}
+
+function fakeEmbed(text){
+  let hash=0;
+  for(let i=0;i<text.length;i++)hash=(hash*31+text.charCodeAt(i))&0xffffffff;
+  const r=n=>(((Math.sin(n+hash)*10000)%1+1)%1).toFixed(3);
+  return[+r(1),+r(2),+r(3),+r(4),+r(5)];
+}
+
+function cosineSim(a,b){
+  const dot=a.reduce((s,v,i)=>s+v*b[i],0);
+  const mA=Math.sqrt(a.reduce((s,v)=>s+v*v,0));
+  const mB=Math.sqrt(b.reduce((s,v)=>s+v*v,0));
+  return dot/(mA*mB);
+}
+
+function addLog(msg,type="info"){
+  const c=document.getElementById("log-console");
+  if(c.querySelector(".log-empty"))c.innerHTML="";
+  const div=document.createElement("div");
+  div.className="log-line";
+  div.style.color=LOG_COLORS[type]||"#94a3b8";
+  div.style.borderLeftColor=(LOG_COLORS[type]||"#94a3b8")+"33";
+  div.textContent=msg;
+  c.appendChild(div);
+  c.scrollTop=c.scrollHeight;
+  const badge=document.getElementById("log-badge");
+  const count=c.querySelectorAll(".log-line").length;
+  badge.textContent=count;
+  badge.style.display=count>0?"inline":"none";
+}
+
+function updateStats(){
+  document.getElementById("stat-chunks").textContent=state.chunks.length;
+  document.getElementById("stat-vectors").textContent=state.vectorDB.length;
+  document.getElementById("stat-steps").textContent=state.completed.size+"/7";
+}
+
+function setStepUI(stepId,status){
+  const btn=document.querySelector(`[data-step="${stepId}"]`);
+  const ico=document.getElementById(`ico-${stepId}`);
+  if(!btn)return;
+  btn.classList.remove("active","done");
+  if(status==="active"){btn.classList.add("active");ico.textContent="⚙️";}
+  else if(status==="done"){btn.classList.add("done");ico.textContent="✅";}
+  else{
+    const icons={ingest:"📄",chunk:"✂️",embed:"🔢",store:"🗄️",query:"🔍",retrieve:"📥",generate:"🤖"};
+    ico.textContent=icons[stepId];
+  }
+}
+
+function setAllDisabled(disabled){
+  document.querySelectorAll("[data-step]").forEach(b=>b.disabled=disabled);
+  document.getElementById("query-input").disabled=disabled;
+  const bs=document.querySelectorAll(".btn-search,.btn-generate");
+  bs.forEach(b=>b.disabled=disabled);
+}
+
+function switchTab(tab){
+  ["pipeline","logs","results"].forEach(t=>{
+    document.getElementById("tab-"+t).style.display=t===tab?"block":"none";
+    document.querySelector(`[data-tab="${t}"]`).classList.toggle("active",t===tab);
+  });
+}
+
+function updateChunksUI(){
+  const c=document.getElementById("chunks-container");
+  if(state.retrieved.length===0){c.innerHTML='<div class="results-empty">Run the Query step to see retrieved chunks...</div>';return;}
+  c.innerHTML=state.retrieved.map((r,i)=>`
+    <div class="chunk-card">
+      <div class="chunk-meta">
+        <span class="chunk-src">#${i+1} -- ${r.source}</span>
+        <span class="chunk-score">${r.score.toFixed(4)}</span>
+      </div>
+      <div class="chunk-text">${r.text}</div>
+    </div>`).join("");
+}
+
+function updateAnswerUI(){
+  const c=document.getElementById("answer-container");
+  if(!state.answer&&!state.streaming){c.innerHTML="";return;}
+  c.innerHTML=`<div class="answer-box">
+    <div class="answer-label">RAG-Generated Answer</div>
+    <div class="answer-text" id="answer-text">${state.answer}${state.streaming?'<span class="cursor">▌</span>':''}</div>
+    ${!state.streaming&&state.answer?`<div class="answer-footer">Answer grounded in ${state.retrieved.length} retrieved chunks from your knowledge base</div>`:""}
+  </div>`;
+}
+
+async function runStep(stepId){
+  if(state.loading)return;
+  state.loading=true;
+  state.activeStep=stepId;
+  setAllDisabled(true);
+  setStepUI(stepId,"active");
+  switchTab("logs");
+
+  const q=document.getElementById("query-input").value.trim();
+
+  if(stepId==="ingest"){
+    document.getElementById("log-console").innerHTML="";
+    document.getElementById("log-badge").style.display="none";
+    state.chunks=[];state.vectorDB=[];state.retrieved=[];state.answer="";state.completed=new Set();
+    updateStats();updateChunksUI();updateAnswerUI();
+    addLog("Starting RAG Pipeline...","system");
+    await sleep(400);
+    for(const doc of DOCS){addLog(`Ingesting: "${doc.title}"`);await sleep(500);}
+    addLog(`Ingested ${DOCS.length} documents successfully!`,"success");
+    state.completed.add("ingest");
+  }
+  else if(stepId==="chunk"){
+    if(!state.completed.has("ingest")){addLog("Run Ingest first!","warn");done();return;}
+    addLog("Chunking documents...","system");await sleep(300);
+    const all=[];
+    for(const doc of DOCS){
+      const parts=chunkText(doc.content,20);
+      parts.forEach((c,i)=>{all.push({id:`${doc.id}-${i}`,source:doc.title,text:c});addLog(`Chunk [${doc.title} #${i+1}]: "${c.substring(0,50)}..."`, "chunk");});
+      await sleep(300);
+    }
+    state.chunks=all;
+    addLog(`Created ${all.length} chunks`,"success");
+    state.completed.add("chunk");
+  }
+  else if(stepId==="embed"){
+    if(!state.completed.has("chunk")){addLog("Run Chunk first!","warn");done();return;}
+    addLog("Generating embeddings (simulated 5D vectors)...","system");await sleep(300);
+    for(const ch of state.chunks.slice(0,4)){
+      const vec=fakeEmbed(ch.text);
+      addLog(`"${ch.text.substring(0,35)}..." -> [${vec.join(", ")}]`,"embed");
+      await sleep(400);
+    }
+    addLog(`All ${state.chunks.length} chunks converted to vectors`,"success");
+    state.completed.add("embed");
+  }
+  else if(stepId==="store"){
+    if(!state.completed.has("embed")){addLog("Run Embed first!","warn");done();return;}
+    addLog("Storing vectors in Vector DB...","system");await sleep(300);
+    state.vectorDB=state.chunks.map(c=>({...c,vector:fakeEmbed(c.text)}));
+    for(let i=0;i<Math.min(3,state.vectorDB.length);i++){
+      addLog(`Stored chunk #${i+1} | source: "${state.vectorDB[i].source}"`,"store");await sleep(300);
+    }
+    addLog(`Vector DB ready -- ${state.vectorDB.length} entries indexed`,"success");
+    state.completed.add("store");
+  }
+  else if(stepId==="query"){
+    if(!state.completed.has("store")){addLog("Build the DB first!","warn");done();return;}
+    if(!q){addLog("Type a question first!","warn");done();return;}
+    addLog(`Embedding query: "${q}"`,"system");await sleep(500);
+    const qVec=fakeEmbed(q);
+    addLog(`Query vector: [${qVec.map(v=>v.toFixed(3)).join(", ")}]`,"embed");
+    await sleep(400);
+    addLog("Computing cosine similarity against all chunks...","info");await sleep(500);
+    const scored=state.vectorDB
+      .map(e=>({...e,score:cosineSim(qVec,e.vector)}))
+      .sort((a,b)=>b.score-a.score).slice(0,3);
+    state.retrieved=scored;
+    scored.forEach((s,i)=>addLog(`Top ${i+1}: score=${s.score.toFixed(4)} | "${s.text.substring(0,45)}..."`,"retrieve"));
+    addLog("Retrieved Top-3 most relevant chunks","success");
+    state.completed.add("query");state.completed.add("retrieve");
+    updateChunksUI();
+    switchTab("results");
+  }
+  else if(stepId==="retrieve"){
+    if(!state.completed.has("query")){addLog("Run Query step first!","warn");done();return;}
+    addLog("Assembling context for LLM prompt...","system");await sleep(400);
+    const ctx=state.retrieved.map((r,i)=>`[Context ${i+1}]: ${r.text}`).join("\n");
+    addLog("Prompt structure:","info");
+    addLog("SYSTEM: You are a helpful assistant...","chunk");
+    addLog("CONTEXT: "+ctx.substring(0,100)+"...","chunk");
+    addLog("QUESTION: "+document.getElementById("query-input").value,"chunk");
+    addLog(`Prompt assembled with ${state.retrieved.length} context chunks`,"success");
+    state.completed.add("retrieve");
+  }
+  else if(stepId==="generate"){
+    if(!state.completed.has("query")){addLog("Run Query step first!","warn");done();return;}
+    const query=document.getElementById("query-input").value;
+    addLog("Calling Claude API with RAG context...","system");
+    state.answer="";state.streaming=true;updateAnswerUI();
+    switchTab("results");
+    await sleep(300);
+    const context=state.retrieved.map((r,i)=>`[Context ${i+1}] (from ${r.source}): ${r.text}`).join("\n\n");
+    const prompt=`You are a helpful assistant. Answer the user's question using ONLY the context provided below. If the answer is not in the context, say "I don't have that information in my knowledge base."\n\nCONTEXT:\n${context}\n\nQUESTION: ${query}\n\nGive a clear, concise answer in 2-3 sentences.`;
+    try{
+      const res=await fetch("https://api.anthropic.com/v1/messages",{
+        method:"POST",headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:1000,stream:true,messages:[{role:"user",content:prompt}]})
+      });
+      const reader=res.body.getReader();const dec=new TextDecoder();let full="";
+      while(true){
+        const{done,value}=await reader.read();if(done)break;
+        const chunk=dec.decode(value);
+        const lines=chunk.split("\n").filter(l=>l.startsWith("data: "));
+        for(const line of lines){
+          try{
+            const data=JSON.parse(line.slice(6));
+            if(data.type==="content_block_delta"&&data.delta?.text){full+=data.delta.text;state.answer=full;updateAnswerUI();}
+          }catch(e){}
+        }
+      }
+      addLog("Answer generated using RAG context!","success");
+      state.completed.add("generate");state.completed.add("retrieve");
+    }catch(e){addLog("API error: "+e.message,"warn");}
+    state.streaming=false;updateAnswerUI();
+  }
+
+  setStepUI(stepId, state.completed.has(stepId)?"done":"idle");
+  done();
+}
+
+function done(){
+  state.loading=false;state.activeStep=null;
+  setAllDisabled(false);
+  updateStats();
+  state.completed.forEach(id=>setStepUI(id,"done"));
+}
+
+function resetAll(){
+  state={loading:false,completed:new Set(),chunks:[],vectorDB:[],retrieved:[],answer:"",streaming:false,activeStep:null};
+  document.getElementById("query-input").value="";
+  document.getElementById("log-console").innerHTML='<div class="log-empty">// Tap a pipeline step to start...</div>';
+  document.getElementById("log-badge").style.display="none";
+  document.querySelectorAll("[data-step]").forEach(b=>{b.classList.remove("active","done");b.disabled=false;});
+  const icons={ingest:"📄",chunk:"✂️",embed:"🔢",store:"🗄️",query:"🔍",retrieve:"📥",generate:"🤖"};
+  Object.entries(icons).forEach(([k,v])=>{const el=document.getElementById(`ico-${k}`);if(el)el.textContent=v;});
+  updateStats();updateChunksUI();updateAnswerUI();
+  switchTab("pipeline");
+}
+
+function clearLogs(){
+  document.getElementById("log-console").innerHTML='<div class="log-empty">// Tap a pipeline step to start...</div>';
+  document.getElementById("log-badge").style.display="none";
+}
+</script>
+</body>
+</html>
