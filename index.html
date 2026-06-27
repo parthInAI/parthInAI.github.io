@@ -56,7 +56,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:15px 0;backdrop-filt
 .btn-p:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(79,140,255,0.38);}
 .btn-o{background:transparent;color:var(--muted2);border:1px solid var(--border2);}
 .btn-o:hover{border-color:var(--accent);color:var(--accent);background:rgba(79,140,255,0.06);}
-.hero-stats{display:flex;gap:44px;padding-top:36px;border-top:1px solid var(--border);}
+.hero-stats{display:flex;gap:36px;padding-top:36px;border-top:1px solid var(--border);flex-wrap:wrap;}
 .stat-n{font-family:var(--fh);font-size:2rem;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 .stat-l{font-size:0.76rem;color:var(--muted);letter-spacing:0.05em;margin-top:2px;}
 .avatar-ring{width:210px;height:210px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2),var(--green));padding:3px;animation:spin 9s linear infinite;flex-shrink:0;}
@@ -96,8 +96,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:15px 0;backdrop-filt
 .proj-desc{font-size:0.84rem;color:var(--muted2);line-height:1.78;flex:1;}
 .proj-tags{display:flex;flex-wrap:wrap;gap:5px;}
 .proj-tag{font-size:0.7rem;padding:3px 9px;border-radius:100px;background:rgba(79,140,255,0.07);border:1px solid rgba(79,140,255,0.14);color:var(--accent);font-weight:500;}
+.proj-links{display:flex;gap:14px;align-items:center;flex-wrap:wrap;}
 .proj-link{display:inline-flex;align-items:center;gap:5px;font-size:0.8rem;font-weight:500;color:var(--muted);margin-top:2px;transition:color var(--t);}
 .proj-link:hover{color:var(--accent);}
+.proj-link.live{color:var(--green);}
+.proj-link.live:hover{color:var(--green);opacity:0.8;}
 .proj-link svg{width:13px;height:13px;transition:transform var(--t);}
 .proj-link:hover svg{transform:translate(2px,-2px);}
 .tl{position:relative;margin-top:48px;padding-left:28px;}
@@ -199,9 +202,10 @@ footer{border-top:1px solid var(--border);padding:28px 0;text-align:center;font-
         </div>
         <div class="hero-stats">
           <div><div class="stat-n">2</div><div class="stat-l">Industry Roles</div></div>
-          <div><div class="stat-n">8</div><div class="stat-l">AI Projects</div></div>
+          <div><div class="stat-n">9</div><div class="stat-l">AI Projects</div></div>
           <div><div class="stat-n">500+</div><div class="stat-l">Queries / Day</div></div>
           <div><div class="stat-n">12</div><div class="stat-l">Production Releases</div></div>
+          <div><div class="stat-n">200</div><div class="stat-l">Tests Passing</div></div>
         </div>
       </div>
       <div class="avatar-ring"><div class="avatar-in">PP</div></div>
@@ -240,14 +244,14 @@ footer{border-top:1px solid var(--border);padding:28px 0;text-align:center;font-
       <p class="s-sub">Built through production deployments, academic research, and hands-on project work across every major area of modern AI engineering.</p>
     </div>
     <div class="skills-grid">
-      <div class="sk-card rv"><div class="sk-head"><div class="sk-ico">AI</div>AI and LLMs</div><div class="tags"><span class="tag">Large Language Models</span><span class="tag">RAG Pipelines</span><span class="tag">Prompt Engineering</span><span class="tag">Vector Databases</span><span class="tag">FAISS</span><span class="tag">ChromaDB</span><span class="tag">Embeddings</span><span class="tag">Transformers</span><span class="tag">Ollama</span></div></div>
+      <div class="sk-card rv"><div class="sk-head"><div class="sk-ico">AI</div>AI and LLMs</div><div class="tags"><span class="tag">Large Language Models</span><span class="tag">RAG Pipelines</span><span class="tag">Prompt Engineering</span><span class="tag">Vector Databases</span><span class="tag">FAISS</span><span class="tag">ChromaDB</span><span class="tag">Qdrant Cloud</span><span class="tag">Embeddings</span><span class="tag">Transformers</span><span class="tag">Ollama</span></div></div>
       <div class="sk-card rv"><div class="sk-head"><div class="sk-ico">AG</div>Agentic Systems</div><div class="tags"><span class="tag">LangChain</span><span class="tag">MCP Protocol</span><span class="tag">Google A2A Protocol</span><span class="tag">Multi-Agent Frameworks</span><span class="tag">Tool Use</span><span class="tag">PPO</span><span class="tag">DDPG</span><span class="tag">Reinforcement Learning</span></div></div>
       <div class="sk-card rv"><div class="sk-head"><div class="sk-ico">ML</div>Machine Learning</div><div class="tags"><span class="tag">scikit-learn</span><span class="tag">TensorFlow</span><span class="tag">PyTorch</span><span class="tag">XGBoost</span><span class="tag">Random Forest</span><span class="tag">Gradient Boosting</span><span class="tag">LSTM</span><span class="tag">ARIMA</span><span class="tag">Differential Privacy</span></div></div>
       <div class="sk-card rv"><div class="sk-head"><div class="sk-ico">GN</div>Generative AI</div><div class="tags"><span class="tag">Diffusion Models</span><span class="tag">DDPM</span><span class="tag">GANs</span><span class="tag">VAE</span><span class="tag">Stable Diffusion</span><span class="tag">U-Net</span><span class="tag">ControlNet</span><span class="tag">Deepfake Detection</span></div></div>
       <div class="sk-card rv"><div class="sk-head"><div class="sk-ico">DE</div>Data Engineering</div><div class="tags"><span class="tag">Python</span><span class="tag">SQL</span><span class="tag">pandas</span><span class="tag">NumPy</span><span class="tag">Hadoop</span><span class="tag">Spark</span><span class="tag">Power BI</span><span class="tag">Excel</span><span class="tag">EDA</span></div></div>
       <div class="sk-card rv"><div class="sk-head"><div class="sk-ico">BE</div>Backend and DevOps</div><div class="tags"><span class="tag">FastAPI</span><span class="tag">Docker</span><span class="tag">CI/CD</span><span class="tag">Git</span><span class="tag">GitHub Copilot</span><span class="tag">Streamlit</span><span class="tag">REST APIs</span><span class="tag">Linux</span><span class="tag">RPA</span></div></div>
       <div class="sk-card rv"><div class="sk-head"><div class="sk-ico">NL</div>NLP and Analytics</div><div class="tags"><span class="tag">NLTK</span><span class="tag">spaCy</span><span class="tag">TextBlob</span><span class="tag">VADER</span><span class="tag">TF-IDF</span><span class="tag">Sentiment Analysis</span><span class="tag">NER</span><span class="tag">Matplotlib</span></div></div>
-      <div class="sk-card rv"><div class="sk-head"><div class="sk-ico">ET</div>AI Ethics and Privacy</div><div class="tags"><span class="tag">Differential Privacy</span><span class="tag">DP-SGD</span><span class="tag">ML Ethics</span><span class="tag">Data Governance</span><span class="tag">Responsible AI</span><span class="tag">GDPR Awareness</span><span class="tag">Federated Learning</span></div></div>
+      <div class="sk-card rv"><div class="sk-head"><div class="sk-ico">ET</div>AI Ethics and Privacy</div><div class="tags"><span class="tag">Differential Privacy</span><span class="tag">DP-SGD</span><span class="tag">ML Ethics</span><span class="tag">Data Governance</span><span class="tag">Responsible AI</span><span class="tag">GDPR Awareness</span><span class="tag">EU AI Act</span></div></div>
     </div>
   </div>
 </section>
@@ -262,51 +266,14 @@ footer{border-top:1px solid var(--border);padding:28px 0;text-align:center;font-
     <div class="proj-grid">
 
       <div class="proj-card rv">
-        <div class="proj-ico">RAG</div>
-        <div class="proj-name">Agentic RAG System with Model Context Protocol</div>
-        <p class="proj-desc">Fully local retrieval-augmented generation pipeline where an AI agent decides when to retrieve from ChromaDB, when to fall back to web search, and remembers conversations across sessions. FastAPI MCP server, Streamlit UI, persistent JSON memory. No cloud APIs required.</p>
-        <div class="proj-tags"><span class="proj-tag">FastAPI</span><span class="proj-tag">ChromaDB</span><span class="proj-tag">Ollama</span><span class="proj-tag">LangChain</span><span class="proj-tag">Streamlit</span><span class="proj-tag">MCP</span></div>
-        <a href="https://github.com/parthInAI/agentic-rag-mcp" target="_blank" class="proj-link">View on GitHub <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
-      </div>
-
-      <div class="proj-card rv">
-        <div class="proj-ico">A2A</div>
-        <div class="proj-name">Agent2Agent Multi-Agent System</div>
-        <p class="proj-desc">Three specialized AI agents that discover each other at runtime through a capability registry and delegate tasks with no central coordinator. Built following Google A2A protocol patterns. Fully modular -- adding a new agent requires zero changes to existing ones.</p>
-        <div class="proj-tags"><span class="proj-tag">FastAPI</span><span class="proj-tag">A2A Protocol</span><span class="proj-tag">Multi-Agent</span><span class="proj-tag">TextBlob</span><span class="proj-tag">Pydantic</span></div>
-        <a href="https://github.com/parthInAI/agent2agent" target="_blank" class="proj-link">View on GitHub <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
-      </div>
-
-      <div class="proj-card rv">
-        <div class="proj-ico">GEN</div>
-        <div class="proj-name">Generative AI -- VAE, GAN, Diffusion Models, Deepfake Detection</div>
-        <p class="proj-desc">Four projects from scratch: VAE with 2D latent space visualisation, DCGAN with adversarial training dynamics, Diffusion Models with DDPM sampling (the mechanism inside Stable Diffusion), and Deepfake Detection using DCT frequency domain and FFT spectrum analysis.</p>
-        <div class="proj-tags"><span class="proj-tag">TensorFlow</span><span class="proj-tag">DDPM</span><span class="proj-tag">GANs</span><span class="proj-tag">VAE</span><span class="proj-tag">scikit-learn</span></div>
-        <a href="https://github.com/parthInAI/generative-ai-projects" target="_blank" class="proj-link">View on GitHub <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
-      </div>
-
-      <div class="proj-card rv">
-        <div class="proj-ico">FIN</div>
-        <div class="proj-name">Finance and Economics AI -- 5 Projects</div>
-        <p class="proj-desc">Fraud detection on imbalanced data, customer churn with automated retention engine, algorithmic trading with MACD and RSI backtesting on real stock data, financial news sentiment analysis across five tickers, and corporate bankruptcy prediction combining Altman Z-Score with gradient boosting.</p>
-        <div class="proj-tags"><span class="proj-tag">scikit-learn</span><span class="proj-tag">yfinance</span><span class="proj-tag">NLTK</span><span class="proj-tag">VADER</span><span class="proj-tag">Altman Z-Score</span></div>
-        <a href="https://github.com/parthInAI/finance-economics" target="_blank" class="proj-link">View on GitHub <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
-      </div>
-
-      <div class="proj-card rv">
-        <div class="proj-ico">SEC</div>
-        <div class="proj-name">Security and Privacy AI</div>
-        <p class="proj-desc">Network Intrusion Detection System classifying four attack types using NSL-KDD-mirrored flow features. Differential Privacy implemented from scratch -- Laplace mechanism, DP-SGD with per-sample gradient clipping, and epsilon budget tracking across training epochs.</p>
-        <div class="proj-tags"><span class="proj-tag">Differential Privacy</span><span class="proj-tag">DP-SGD</span><span class="proj-tag">NIDS</span><span class="proj-tag">NumPy</span><span class="proj-tag">Random Forest</span></div>
-        <a href="https://github.com/parthInAI/security-privacy-ai" target="_blank" class="proj-link">View on GitHub <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
-      </div>
-
-      <div class="proj-card rv">
-        <div class="proj-ico">ANA</div>
-        <div class="proj-name">Term Deposit Prediction -- Data Analytics</div>
-        <p class="proj-desc">End-to-end data analytics project on historical banking data predicting whether a client subscribes to a term deposit. Full EDA, preprocessing pipeline, feature selection, classification model building, and business-level interpretation of results.</p>
-        <div class="proj-tags"><span class="proj-tag">pandas</span><span class="proj-tag">scikit-learn</span><span class="proj-tag">EDA</span><span class="proj-tag">Feature Engineering</span><span class="proj-tag">SQL</span></div>
-        <a href="https://github.com/parthInAI/Data-Analytics-term-deposit-prediction" target="_blank" class="proj-link">View on GitHub <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
+        <div class="proj-ico">PLQ</div>
+        <div class="proj-name">PlanIQ -- AI-Powered Irish Planning Permission Guidance</div>
+        <p class="proj-desc">Domain-specific RAG platform deployed live. Built on 13,025 chunks of real Irish planning law -- Planning and Development Acts, 8 Section 28 ministerial guidelines, 27 council development plans, and 37 An Coimisiun Pleanala inspector reports. Hybrid BM25 plus dense vector retrieval merged via Reciprocal Rank Fusion. 7-layer hallucination detection: staleness gate, entity grounding, numeric threshold grounding, HITL escalation. Phase 2 document review tool: Article 22 compliance checker -- upload draft planning application and receive pre-submission gap report. Deployed on Qdrant Cloud and Streamlit Cloud. 200 passing tests across 6 suites. EU AI Act compliant.</p>
+        <div class="proj-tags"><span class="proj-tag">RAG</span><span class="proj-tag">Qdrant Cloud</span><span class="proj-tag">BM25</span><span class="proj-tag">FastAPI</span><span class="proj-tag">Streamlit</span><span class="proj-tag">Claude API</span><span class="proj-tag">Hallucination Detection</span><span class="proj-tag">Irish Planning Law</span><span class="proj-tag">Inspector Reports</span></div>
+        <div class="proj-links">
+          <a href="https://planiq-9zy7tcux8htgbquymyaeot.streamlit.app" target="_blank" class="proj-link live">Live Demo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
+          <a href="https://github.com/parthInAI/planiq" target="_blank" class="proj-link">GitHub <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
+        </div>
       </div>
 
       <div class="proj-card rv">
@@ -314,15 +281,55 @@ footer{border-top:1px solid var(--border);padding:28px 0;text-align:center;font-
         <div class="proj-name">AgentOS -- Production Multi-Agent AI Platform</div>
         <p class="proj-desc">Production-grade multi-agent platform built across 5 phases -- hybrid RAG (ChromaDB + BM25 + RRF fusion), intent-routing swarm with specialist agents, HITL safety gates, Redis long-term memory, text-to-SQL with AST validation, and a 4-layer eval pyramid with 50 golden Q&A pairs. 222 passing tests across 20 modules. EU AI Act risk assessment documented.</p>
         <div class="proj-tags"><span class="proj-tag">FastAPI</span><span class="proj-tag">ChromaDB</span><span class="proj-tag">BM25</span><span class="proj-tag">Multi-Agent</span><span class="proj-tag">Redis</span><span class="proj-tag">Pydantic</span><span class="proj-tag">Docker</span><span class="proj-tag">LangChain</span></div>
-        <a href="https://github.com/parthInAI/agentos" target="_blank" class="proj-link">View on GitHub <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
+        <div class="proj-links"><a href="https://github.com/parthInAI/agentos" target="_blank" class="proj-link">View on GitHub <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a></div>
       </div>
 
       <div class="proj-card rv">
-        <div class="proj-ico">PLQ</div>
-        <div class="proj-name">PlanIQ -- AI-Powered Irish Planning Permission Guidance</div>
-        <p class="proj-desc">Domain-specific RAG platform built on 1,192 chunks of real Irish planning law -- Planning and Development Acts, Schedule 2 exempted development regulations, and Dublin City Council Development Plan 2022-2028. Hybrid retrieval with BM25 plus dense vector search plus cross-encoder reranker. 7-layer hallucination detection shield with entity grounding, staleness gates, and HITL escalation. Citation-first LLM generation with structured JSON output. FastAPI backend, Streamlit UI, 113 passing tests. EU AI Act compliant.</p>
-        <div class="proj-tags"><span class="proj-tag">RAG</span><span class="proj-tag">ChromaDB</span><span class="proj-tag">BM25</span><span class="proj-tag">FastAPI</span><span class="proj-tag">Streamlit</span><span class="proj-tag">Claude API</span><span class="proj-tag">Hallucination Detection</span><span class="proj-tag">Irish Planning Law</span></div>
-        <a href="https://github.com/parthInAI/planiq" target="_blank" class="proj-link">View on GitHub <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
+        <div class="proj-ico">RAG</div>
+        <div class="proj-name">Agentic RAG System with Model Context Protocol</div>
+        <p class="proj-desc">Fully local retrieval-augmented generation pipeline where an AI agent decides when to retrieve from ChromaDB, when to fall back to web search, and remembers conversations across sessions. FastAPI MCP server, Streamlit UI, persistent JSON memory. No cloud APIs required.</p>
+        <div class="proj-tags"><span class="proj-tag">FastAPI</span><span class="proj-tag">ChromaDB</span><span class="proj-tag">Ollama</span><span class="proj-tag">LangChain</span><span class="proj-tag">Streamlit</span><span class="proj-tag">MCP</span></div>
+        <div class="proj-links"><a href="https://github.com/parthInAI/agentic-rag-mcp" target="_blank" class="proj-link">View on GitHub <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a></div>
+      </div>
+
+      <div class="proj-card rv">
+        <div class="proj-ico">A2A</div>
+        <div class="proj-name">Agent2Agent Multi-Agent System</div>
+        <p class="proj-desc">Three specialized AI agents that discover each other at runtime through a capability registry and delegate tasks with no central coordinator. Built following Google A2A protocol patterns. Fully modular -- adding a new agent requires zero changes to existing ones.</p>
+        <div class="proj-tags"><span class="proj-tag">FastAPI</span><span class="proj-tag">A2A Protocol</span><span class="proj-tag">Multi-Agent</span><span class="proj-tag">TextBlob</span><span class="proj-tag">Pydantic</span></div>
+        <div class="proj-links"><a href="https://github.com/parthInAI/agent2agent" target="_blank" class="proj-link">View on GitHub <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a></div>
+      </div>
+
+      <div class="proj-card rv">
+        <div class="proj-ico">GEN</div>
+        <div class="proj-name">Generative AI -- VAE, GAN, Diffusion Models, Deepfake Detection</div>
+        <p class="proj-desc">Four projects from scratch: VAE with 2D latent space visualisation, DCGAN with adversarial training dynamics, Diffusion Models with DDPM sampling (the mechanism inside Stable Diffusion), and Deepfake Detection using DCT frequency domain and FFT spectrum analysis.</p>
+        <div class="proj-tags"><span class="proj-tag">TensorFlow</span><span class="proj-tag">DDPM</span><span class="proj-tag">GANs</span><span class="proj-tag">VAE</span><span class="proj-tag">scikit-learn</span></div>
+        <div class="proj-links"><a href="https://github.com/parthInAI/generative-ai-projects" target="_blank" class="proj-link">View on GitHub <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a></div>
+      </div>
+
+      <div class="proj-card rv">
+        <div class="proj-ico">FIN</div>
+        <div class="proj-name">Finance and Economics AI -- 5 Projects</div>
+        <p class="proj-desc">Fraud detection on imbalanced data, customer churn with automated retention engine, algorithmic trading with MACD and RSI backtesting on real stock data, financial news sentiment analysis across five tickers, and corporate bankruptcy prediction combining Altman Z-Score with gradient boosting.</p>
+        <div class="proj-tags"><span class="proj-tag">scikit-learn</span><span class="proj-tag">yfinance</span><span class="proj-tag">NLTK</span><span class="proj-tag">VADER</span><span class="proj-tag">Altman Z-Score</span></div>
+        <div class="proj-links"><a href="https://github.com/parthInAI/finance-economics" target="_blank" class="proj-link">View on GitHub <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a></div>
+      </div>
+
+      <div class="proj-card rv">
+        <div class="proj-ico">SEC</div>
+        <div class="proj-name">Security and Privacy AI</div>
+        <p class="proj-desc">Network Intrusion Detection System classifying four attack types using NSL-KDD-mirrored flow features. Differential Privacy implemented from scratch -- Laplace mechanism, DP-SGD with per-sample gradient clipping, and epsilon budget tracking across training epochs.</p>
+        <div class="proj-tags"><span class="proj-tag">Differential Privacy</span><span class="proj-tag">DP-SGD</span><span class="proj-tag">NIDS</span><span class="proj-tag">NumPy</span><span class="proj-tag">Random Forest</span></div>
+        <div class="proj-links"><a href="https://github.com/parthInAI/security-privacy-ai" target="_blank" class="proj-link">View on GitHub <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a></div>
+      </div>
+
+      <div class="proj-card rv">
+        <div class="proj-ico">ANA</div>
+        <div class="proj-name">Term Deposit Prediction -- Data Analytics</div>
+        <p class="proj-desc">End-to-end data analytics project on historical banking data predicting whether a client subscribes to a term deposit. Full EDA, preprocessing pipeline, feature selection, classification model building, and business-level interpretation of results.</p>
+        <div class="proj-tags"><span class="proj-tag">pandas</span><span class="proj-tag">scikit-learn</span><span class="proj-tag">EDA</span><span class="proj-tag">Feature Engineering</span><span class="proj-tag">SQL</span></div>
+        <div class="proj-links"><a href="https://github.com/parthInAI/Data-Analytics-term-deposit-prediction" target="_blank" class="proj-link">View on GitHub <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a></div>
       </div>
 
     </div>
@@ -365,11 +372,11 @@ footer{border-top:1px solid var(--border);padding:28px 0;text-align:center;font-
           </div>
           <div class="tl-company">Sharma Hyundai -- Ahmedabad, India</div>
           <div class="tl-pts">
-            <div class="tl-pt">Built a time series forecasting model from historical transaction data, raising stock allocation accuracy by 15% and cutting forecasting errors by 12% -- presenting methodology and validation evidence to the operations management team.</div>
-            <div class="tl-pt">Queried, cleaned, and validated 40,000-plus rows of operational data in Python and SQL, raising reporting accuracy by 28% by tracing data failures to their upstream source and fixing them there.</div>
-            <div class="tl-pt">Shipped 3 data reporting pipelines with scheduled outputs, reducing management reporting time by 30% and removing manual data preparation for two business teams.</div>
-            <div class="tl-pt">Introduced scripted weekly data quality checks that eliminated 22% of data inconsistencies, creating a validated data layer underpinning all subsequent model inputs and reporting.</div>
-            <div class="tl-pt">Presented customer segmentation analysis to management, linking statistical findings to business outcomes and informing a revised strategy that grew campaign effectiveness by 12%.</div>
+            <div class="tl-pt">Built a time series forecasting model from historical transaction data, raising stock allocation accuracy by 15% and cutting forecasting errors by 12%.</div>
+            <div class="tl-pt">Queried, cleaned, and validated 40,000-plus rows of operational data in Python and SQL, raising reporting accuracy by 28%.</div>
+            <div class="tl-pt">Shipped 3 data reporting pipelines with scheduled outputs, reducing management reporting time by 30%.</div>
+            <div class="tl-pt">Introduced scripted weekly data quality checks that eliminated 22% of data inconsistencies.</div>
+            <div class="tl-pt">Presented customer segmentation analysis to management, informing a revised strategy that grew campaign effectiveness by 12%.</div>
           </div>
         </div>
       </div>
@@ -450,13 +457,14 @@ footer{border-top:1px solid var(--border);padding:28px 0;text-align:center;font-
       <div class="contact-links">
         <a href="https://www.linkedin.com/in/parthpandya-/" target="_blank" class="c-link">LinkedIn -- Parth Pandya</a>
         <a href="https://github.com/parthInAI" target="_blank" class="c-link">GitHub -- parthInAI</a>
+        <a href="https://planiq-9zy7tcux8htgbquymyaeot.streamlit.app" target="_blank" class="c-link">PlanIQ -- Live Demo</a>
       </div>
     </div>
   </div>
 </section>
 
 <footer>
-  <div class="wrap"><p>Parth Pandya -- AI/ML Engineer and Data Scientist -- Dublin, Ireland -- 2025</p></div>
+  <div class="wrap"><p>Parth Pandya -- AI/ML Engineer and Data Scientist -- Dublin, Ireland -- 2026</p></div>
 </footer>
 
 <script>
